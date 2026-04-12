@@ -1,0 +1,25 @@
+{
+  "name": "simple_crud_app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "serve": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SumaiyaMunas123/Simple_CRUD_App.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/SumaiyaMunas123/Simple_CRUD_App/issues"
+  },
+  "homepage": "https://github.com/SumaiyaMunas123/Simple_CRUD_App#readme",
+  "dependencies": {
+    "express": "^5.2.1"
+  }
+}

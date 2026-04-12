@@ -1,0 +1,39 @@
+# Node modules (VERY important)
+node_modules/
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Environment variables (secrets)
+.env
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# VS Code settings (optional)
+.vscode/
+
+# Build / dist folders
+dist/
+build/
+
+# Temporary files
+tmp/
+temp/
+
+# Package lock (optional - usually keep it, but ignore if needed)
+# package-lock.json
+
+# Coverage (testing)
+coverage/
+
+# dotenv files
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
