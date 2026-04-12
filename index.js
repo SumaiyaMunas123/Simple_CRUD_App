@@ -15,6 +15,10 @@ app.listen(3000, ()=>{ //starts the server and wait for request
     console.log('Server is running on port 3000');// display in server
 });
 
-app.get('/', (req, res) => {
-    res.send('Hello from Node API');
+app.get('/', (req, res) => { // get - reads data, '/' - home route 
+    // req - data coming from the client (request), res - what u send back to user(response), this is also a callback function 
+    res.send('Hello from Node API Server'); //sends to user 
 });
+
+//got nodemon , so whatever we change auto changes when we save, we dont have to restart the server every time we make a change.
+
