@@ -24,18 +24,26 @@ app.get('/', (req, res) => { // get - reads data, '/' - home route
     res.send('Hello from Node API Server'); //sends to user 
 });
 
-app.get('/api/products', async (req, res)=>{
+app.get('/api/products', async (req, res)=>{ //async is a function tht allows await, time taking
     try{
         const products = await Product.find({});
+        // Product is our model, find is a function to get data from db, {} here means all data, await waits until db responds
         res.status(200).json(products);
+        // status(200) means http success code, .json sends data as json format to user
     } catch(error){
         res.status(500).json({message: error.message});
+        // 500 is server error
     }
 });
 
- app.get('/api/product/:id', async (req, res)=>{
+// get a prodcut using id
+
+ app.get('/api/product/:id', async (req, res)=>{//:id is a dynamic parameter, it can be any id, we can access it using req.params.id
     try{
-        const {id} = req.params;
+        const {id} = req.params; //req.params is an object holding the id,
+        // {id} means create a variable called id and assign it the value of req.params.id
+        // {} is a pattern used to extract values
+        // {id} is a destructuring syntax
         const product = await Product.findById(id);
         res.status(200).json(product);
     } catch(error){
@@ -52,6 +60,21 @@ app.post('/api/products',async(req,res)=>{//post - user sends data
     try{
         const product = await Product.create(req.body);
         res.status(200).json(product);
+    }catch(error){
+        res.status(500).json({message: error.message});
+    }
+})
+
+// updating a product
+app.put('/api/product/:id', async(req,res)=>{
+    try{
+        const{id} = req.params;
+        const product = await Product.findByIdAndUpdate(id, req.body);
+        if(!product){
+            return res.status(404).json({message: "Product not found"});
+        }
+        const updatedProduct =await Product.findById(id);
+        res.status(200).json(updatedProduct);
     }catch(error){
         res.status(500).json({message: error.message});
     }
