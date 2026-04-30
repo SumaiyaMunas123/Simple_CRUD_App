@@ -4,8 +4,11 @@ const express = require('express'); //importing the Express library into the pro
 const mongoose = require('mongoose'); //importing the Mongoose library into the project. get the tools
 const app= express(); //express() is a function → calling it gives you an app object. creating an express application(server)
 const Product= require('./models/product.model');
+const productRoute = require('./routes/product.route.js');
 
+// middlewares
 app.use(express.json()); //middleware to act as translator to understand json nd pass it 
+app.use(express.urlencoded({extended: false})); //middleware to understand url encoded data, extended: false means we are not allowing nested objects in url encoded data
 
 /* This app is the main thing you use to:
 - create routes (app.get, app.post)
@@ -19,12 +22,21 @@ app.use(express.json()); //middleware to act as translator to understand json nd
 //     console.log('Server is running on port 3000');// display in server
 // });
 
+
+// routes
+app.use('/api/products', productRoute);
+
+
+
 app.get('/', (req, res) => { // get - reads data, '/' - home route 
     // req - data coming from the client (request), res - what u send back to user(response), this is also a callback function 
     res.send('Hello from Node API Server'); //sends to user 
 });
 
-app.get('/api/products', async (req, res)=>{ //async is a function tht allows await, time taking
+
+
+
+/*app.get('/api/products', async (req, res)=>{ //async is a function tht allows await, time taking
     try{
         const products = await Product.find({});
         // Product is our model, find is a function to get data from db, {} here means all data, await waits until db responds
@@ -34,11 +46,11 @@ app.get('/api/products', async (req, res)=>{ //async is a function tht allows aw
         res.status(500).json({message: error.message});
         // 500 is server error
     }
-});
+});*/
 
 // get a prodcut using id
 
- app.get('/api/product/:id', async (req, res)=>{//:id is a dynamic parameter, it can be any id, we can access it using req.params.id
+ /*app.get('/api/products/:id', async (req, res)=>{//:id is a dynamic parameter, it can be any id, we can access it using req.params.id
     try{
         const {id} = req.params; //req.params is an object holding the id,
         // {id} means create a variable called id and assign it the value of req.params.id
@@ -49,24 +61,24 @@ app.get('/api/products', async (req, res)=>{ //async is a function tht allows aw
     } catch(error){
         res.status(500).json({message: error.message});
     }
-});
+});*/
 
 // app.post('/api/products',(req,res)=>{//post - user sends data
 //     console.log(req.body); 
 //     res.send(req.body);
 // })
 
-app.post('/api/products',async(req,res)=>{//post - user sends data
+/*app.post('/api/products',async(req,res)=>{//post - user sends data
     try{
         const product = await Product.create(req.body);
         res.status(200).json(product);
     }catch(error){
         res.status(500).json({message: error.message});
     }
-})
+})*/
 
 // updating a product
-app.put('/api/product/:id', async(req,res)=>{
+/*app.put('/api/products/:id', async(req,res)=>{
     try{
         const{id} = req.params;
         const product = await Product.findByIdAndUpdate(id, req.body);
@@ -78,7 +90,21 @@ app.put('/api/product/:id', async(req,res)=>{
     }catch(error){
         res.status(500).json({message: error.message});
     }
-})
+})*/
+
+// deleting a product 
+/*app.delete('/api/products/:id', async(req, res)=>{
+    try{
+        const {id}= req.params;
+        const product = await Product.findByIdAndDelete(id, req.body);
+        if(!product){
+            return res.status(404).json({message: "Product not found"});
+        }
+        res.status(200).json(deletedProduct);
+    }catch(error){
+        res.status(500).json({message : error.messsage});
+    }
+}) */
 
 //got nodemon , so whatever we change auto changes when we save, we dont have to restart the server every time we make a change.
 
